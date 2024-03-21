@@ -6,6 +6,15 @@ const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</
 const Statistics = ({ good, neutral, bad }) => {
   const total = good + neutral + bad
   const score = (good * 1) + (bad * -1)
+
+  if (total === 0) {
+    return (
+      <>
+        <p>No feedback given</p>
+      </>
+    )
+  }
+
   return (
     <>
       <p>good {good}</p>
