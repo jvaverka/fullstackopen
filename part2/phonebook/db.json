@@ -21,19 +21,14 @@
       "id": "4"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Albert Einstein",
       "number": "404-123-4567"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Henry David Thoreau",
       "number": "404-867-5309"
-    },
-    {
-      "id": 7,
-      "name": "John Doe",
-      "number": "404-867-9999"
     }
   ]
 }

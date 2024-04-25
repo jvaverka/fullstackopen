@@ -36,6 +36,24 @@ const App = () => {
     }
   }
 
+  const removePerson = (personId) => {
+    const personExists = persons.find((person) => {
+      return person.id === personId
+    })
+    if (!personExists) {
+      alert(`Cannot find person with id ${personId}`)
+    } else if (window.confirm(`Delete ${personExists.name} ?`)) {
+      personService
+        .remove(personExists.id)
+        .then(() => {
+          const validPersons = persons.filter((person) => {
+            return person.id !== personExists.id
+          })
+          setPersons(validPersons)
+        })
+    }
+  }
+
   const handleNewPerson = (event) => {
     event.preventDefault()
     const personExists = persons.find((person) => {
@@ -48,7 +66,7 @@ const App = () => {
       const newPerson = {
         name: newName,
         number: newNumber,
-        id: persons.length + 1
+        id: (persons.length + 1).toString()
       }
       personService
         .create(newPerson)
@@ -81,7 +99,7 @@ const App = () => {
         handleNewNumber={handleNewNumber}
       />
       <h3>Numbers</h3>
-      <Persons persons={peopleToShow()} />
+      <Persons persons={peopleToShow()} removePerson={removePerson} />
     </div>
 
   )
