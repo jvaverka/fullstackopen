@@ -61,7 +61,23 @@ const App = () => {
     })
 
     if (personExists) {
-      alert(`${newName} is already added to the phonebook`)
+      const updatePerson = window.confirm((`${newName} is already added to the phonebook, replace the old number with a new one?`))
+      if (updatePerson) {
+        const newPerson = {
+          ...personExists,
+          number: newNumber,
+        }
+        personService
+          .update(newPerson)
+          .then(returnedPerson => {
+            const unchangedPersons = persons.filter((person) => {
+              return person.id !== returnedPerson.id
+            })
+            setPersons(unchangedPersons.concat(returnedPerson))
+            setNewName('enter a new name...')
+            setNewNumber('404-867-5309')
+          })
+      }
     } else {
       const newPerson = {
         name: newName,
