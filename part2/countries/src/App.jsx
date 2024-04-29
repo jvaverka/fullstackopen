@@ -14,6 +14,11 @@ function App() {
     setValue(event.target.value)
   }
 
+  const showCountry = (countryData) => {
+    setCountries([countryData])
+    setCountry(countryData)
+  }
+
   useEffect(() => {
     if (value !== '') {
       countryServices
@@ -48,7 +53,7 @@ function App() {
   return (
     <>
       <Input onChange={onChange} value={value} />
-      <Countries countries={countries} />
+      <Countries countries={countries} showCountry={showCountry} />
       <Country country={country} />
     </>
   )
