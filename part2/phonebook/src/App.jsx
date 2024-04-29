@@ -11,7 +11,8 @@ const App = () => {
   const [newName, setNewName] = useState('please enter a name...')
   const [newNumber, setNewNumber] = useState('0')
   const [filterValue, setFilterValue] = useState('')
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [notificationMessage, setNotificationMessage] = useState(null)
+  const [notificationColor, setNotificationColor] = useState('green')
 
   useEffect(() => {
     console.log('effect')
@@ -80,15 +81,18 @@ const App = () => {
             setNewNumber('404-867-5309')
           })
           .then(() => {
-            setErrorMessage(`Updated ${newPerson.name}`)
+            setNotificationColor('green')
+            setNotificationMessage(`Updated ${newPerson.name}`)
             setTimeout(() => {
-              setErrorMessage(null)
+              setNotificationMessage(null)
             }, 5000)
           })
           .catch(error => {
-            setErrorMessage(`Failed to update ${newPerson.name}: ${error}`)
+            setNotificationColor('red')
+            setNotificationMessage(`Information of ${newPerson.name} has already been removed from server`)
+            console.log(error)
             setTimeout(() => {
-              setErrorMessage(null)
+              setNotificationMessage(null)
             }, 5000)
           })
       }
@@ -106,15 +110,18 @@ const App = () => {
           setNewNumber('404-867-5309')
         })
         .then(() => {
-          setErrorMessage(`Added ${newPerson.name}`)
+          setNotificationColor('green')
+          setNotificationMessage(`Added ${newPerson.name}`)
           setTimeout(() => {
-            setErrorMessage(null)
+            setNotificationMessage(null)
           }, 5000)
         })
         .catch(error => {
-          setErrorMessage(`Failed to add ${newPerson.name}`)
+          setNotificationColor('red')
+          setNotificationMessage(`Failed to add ${newPerson.name}`)
+          console.log(error)
           setTimeout(() => {
-            setErrorMessage(null)
+            setNotificationMessage(null)
           }, 5000)
         })
     }
@@ -131,7 +138,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={errorMessage} />
+      <Notification message={notificationMessage} notificationColor={notificationColor} />
       <Filter filterValue={filterValue} handleFilterValue={handleFilterValue} />
       <h3>add a new</h3>
       <PersonForm

@@ -1,10 +1,10 @@
-const Notification = ({ message }) => {
+const Notification = ({ message, notificationColor }) => {
   if (message === null) {
     return null
   }
 
   const notificationStyle = {
-    color: 'green',
+    color: notificationColor,
     background: 'lightgrey',
     fontSize: 20,
     borderStyle: 'solid',
