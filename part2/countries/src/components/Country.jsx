@@ -1,3 +1,5 @@
+import CountryWeather from './CountryWeather.jsx';
+
 const Country = ({ country }) => {
   if (!country) {
     return null
@@ -17,6 +19,7 @@ const Country = ({ country }) => {
         )}
       </ul>
       <img src={country.flags.png} alt={country.flags.alt} />
+      <CountryWeather capital={country.capital} />
     </>
   )
 }
